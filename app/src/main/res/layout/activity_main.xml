@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:orientation="vertical"
-    android:background="#fff999"
+    android:background="#5C6BC0"
     android:paddingLeft="20dp"
     android:paddingRight="20dp">
 
