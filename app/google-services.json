@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1075592327161",
+    "firebase_url": "https://fir-d84eb-default-rtdb.firebaseio.com",
+    "project_id": "fir-d84eb",
+    "storage_bucket": "fir-d84eb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1075592327161:android:7a2deeb8c06c28203a9728",
+        "android_client_info": {
+          "package_name": "com.tesji.firebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1075592327161-v3467jq7ba22ru5rtjdirb6o6fb521r6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAtbpPOt2qTaAXFU_q8xmdg6BN5vMFX8Og"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1075592327161-v3467jq7ba22ru5rtjdirb6o6fb521r6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
