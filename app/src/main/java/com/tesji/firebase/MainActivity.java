@@ -1,25 +1,35 @@
 package com.tesji.firebase;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.tesji.firebase.model.Persona;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
+    private List<Persona> listPerson = new ArrayList<Persona>();
+    ArrayAdapter<Persona> arrayAdapterPersona;
+
     EditText nomP, appP, correoP, passwordP;
     ListView listV_personas;
+
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
@@ -34,6 +44,29 @@ public class MainActivity extends AppCompatActivity {
         passwordP=findViewById(R.id.textInput_Contraseña);
         listV_personas=findViewById(R.id.datos_personas);
         inicializarFirebase();
+
+        listarDatos();
+    }
+
+    private void listarDatos() {
+        databaseReference.child("Persona").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                listPerson.clear();
+                for (DataSnapshot objSnapshot : snapshot.getChildren()){
+                    Persona p = objSnapshot.getValue(Persona.class);
+                    listPerson.add(p);
+
+                    arrayAdapterPersona= new ArrayAdapter<>(MainActivity.this, android.R.layout.simple_list_item_1, listPerson);
+                    listV_personas.setAdapter(arrayAdapterPersona);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void inicializarFirebase() {
