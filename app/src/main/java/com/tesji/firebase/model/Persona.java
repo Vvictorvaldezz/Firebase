@@ -2,10 +2,19 @@ package com.tesji.firebase.model;
 
 public class Persona {
 
-    public String uid;
-    public  String Nombre;
-    public  String Apellido;
-    public  String Correo;
+    private String uid;
+    private  String Nombre;
+    private  String Apellido;
+    private  String Correo;
+    private  String Password;
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String password) {
+        Password = password;
+    }
 
     public Persona() {
     }
