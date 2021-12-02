@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         String password = passwordP.getText().toString();
 
         switch (item.getItemId()){
+
             case R.id.icon_add:{
                 if (nombre.equals("") || app.equals("") || correo.equals("") || password.equals("")){
                     validacion();
