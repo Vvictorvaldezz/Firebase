@@ -212,6 +212,7 @@ public class MainActivity extends AppCompatActivity {
         appP.setText("");
         correoP.setText("");
         passwordP.setText("");
+        nomP.requestFocus();
     }
 
     private void validacion() {
