@@ -1,5 +1,6 @@
 package com.tesji.firebase;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,6 +12,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.FirebaseApp;
@@ -110,39 +112,94 @@ public class MainActivity extends AppCompatActivity {
                     validacion();
                 }
                 else {
-                    Persona p =new Persona();
-                    p.setUid(UUID.randomUUID().toString());
-                    p.setNombre(nombre);
-                    p.setApellido(app);
-                    p.setCorreo(correo);
-                    p.setPassword(password);
-                    databaseReference.child("Persona").child(p.getUid()).setValue(p);
 
-                    Toast.makeText(this, "Agregar", Toast.LENGTH_LONG).show();
-                    limpiarCajas();
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setMessage("¿Está seguro de agregar el registro?")
+                            .setTitle("¡Mensaje de advertencia!");
+                    builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Persona p =new Persona();
+                            p.setUid(UUID.randomUUID().toString());
+                            p.setNombre(nombre);
+                            p.setApellido(app);
+                            p.setCorreo(correo);
+                            p.setPassword(password);
+                            databaseReference.child("Persona").child(p.getUid()).setValue(p);
+                            limpiarCajas();
+                            Toast.makeText(MainActivity.this, "¡Acción exitosa!", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            Toast.makeText(MainActivity.this, "¡Acción cancelada!", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+
+
                 }
                 break;
             }
 
             case R.id.icon_save:{
-                Persona p = new Persona();
-                p.setUid(personaSelected.getUid());
-                p.setNombre(nomP.getText().toString().trim());
-                p.setApellido(appP.getText().toString().trim());
-                p.setCorreo(correoP.getText().toString().trim());
-                p.setPassword(passwordP.getText().toString().trim());
-                databaseReference.child("Persona").child(p.getUid()).setValue(p);
-                limpiarCajas();
-                Toast.makeText(this, "Guardar", Toast.LENGTH_LONG).show();
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setMessage("¿Está seguro de realizar los cambios?")
+                        .setTitle("¡Mensaje de advertencia!");
+                builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Persona p = new Persona();
+                        p.setUid(personaSelected.getUid());
+                        p.setNombre(nomP.getText().toString().trim());
+                        p.setApellido(appP.getText().toString().trim());
+                        p.setCorreo(correoP.getText().toString().trim());
+                        p.setPassword(passwordP.getText().toString().trim());
+                        databaseReference.child("Persona").child(p.getUid()).setValue(p);
+                        limpiarCajas();
+                        Toast.makeText(MainActivity.this, "¡Acción exitosa!", Toast.LENGTH_LONG).show();
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "¡Acción cancelada!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
                 break;
             }
 
             case R.id.icon_delete:{
-                Persona p = new Persona();
-                p.setUid(personaSelected.getUid());
-                databaseReference.child("Persona").child(p.getUid()).removeValue();
-                Toast.makeText(this, "Eliminar", Toast.LENGTH_LONG).show();
-                limpiarCajas();
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setMessage("¿Está seguro de eliminar el registro?")
+                        .setTitle("¡Mensaje de advertencia!");
+                builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Persona p = new Persona();
+                        p.setUid(personaSelected.getUid());
+                        databaseReference.child("Persona").child(p.getUid()).removeValue();
+                        limpiarCajas();
+                        Toast.makeText(MainActivity.this, "¡Acción exitosa!", Toast.LENGTH_LONG).show();
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(MainActivity.this, "¡Acción cancelada!", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+
                 break;
             }
             default:break;
