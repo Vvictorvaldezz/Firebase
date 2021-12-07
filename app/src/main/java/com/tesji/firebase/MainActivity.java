@@ -31,13 +31,13 @@ public class MainActivity extends AppCompatActivity {
     private List<Persona> listPerson = new ArrayList<Persona>();
     ArrayAdapter<Persona> arrayAdapterPersona;
 
-    EditText nomP, appP, correoP, passwordP;
-    ListView listV_personas;
+    EditText nomP, appP, correoP, passwordP;//
+    ListView listV_personas;//
 
-    FirebaseDatabase firebaseDatabase;
-    DatabaseReference databaseReference;
+    FirebaseDatabase firebaseDatabase;//
+    DatabaseReference databaseReference;//
 
-    Persona personaSelected;
+    Persona personaSelected;//
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
